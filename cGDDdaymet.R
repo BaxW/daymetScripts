@@ -55,8 +55,8 @@ rm(daymetDat)
 cGDDapril <- full_daymetDF %>%
   filter(doy<=91) %>% # april 1st is the 91st day of the year
   group_by(ID,year) %>%
-  mutate(GD=ifelse(tmax<=0,0,(tmax-tmin)/2 - 0)) %>% # calculate GDD for each day
-  summarize(cGDD= sum(GD)) # calcualte cGDD as the sum of GDD before april 1st
+  mutate(GD=ifelse((tmax+tmin)/2>0,(tmax+tmin)/2,0)) %>%
+  mutate(cGGD=cumsum(GD)) # calcualte cGDD as the sum of GD before april 1st
 
 # plot 
 
