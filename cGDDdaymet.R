@@ -76,7 +76,7 @@ dat2012 <- full_daymetDF %>%
   filter(year==2012, doy<=91) %>% #subset Jan1st-april1st 2012
   group_by(ID) %>%
   arrange(doy) %>% # make sure it's in chronological order
-  mutate(GD=ifelse(tmax<=0,0,(tmax-tmin)/2 - 0)) %>% # calcualte growing degrees for each day
+  mutate(GD=ifelse((tmax+tmin)/2>0,(tmax+tmin)/2,0)) %>%# calcualte growing degrees for each day
   group_modify(~helpr(.x))  # apply helper function to get the GD accumulation curve
 
 
